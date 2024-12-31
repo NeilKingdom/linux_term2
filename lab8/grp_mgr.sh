@@ -1,9 +1,10 @@
 #!/bin/bash
-#Neil Kingdom
-#040967309
-#20W_CST8102 Section 300
-#April 1, 2020
-#This script creates a user interface for user and group management
+# Neil Kingdom
+# 040967309
+# 20W_CST8102 Section 300
+# April 1, 2020
+# This script creates a user interface for user and group management
+
 while [ true ]; do
 	echo -en "Choose one of the following options:\nA to Create a user account\nB to Delete a user account\nC to Change supplementary group for a user account\nD to Change initial group for a user account\nE to Change default login shell for a user account\nF to Change account expiration date for a user account\nQ to quit\nWhat would you like to do?: "; read userIn
 	if [ $userIn == A ] || [ $userIn == a ]; then
@@ -13,12 +14,12 @@ while [ true ]; do
 		sudo useradd -d $homeDir -s $shell -m $userName
 		#using case, we will test the last instance of the exit status (last command ran) to decide what the resulting output should be
 		case $? in
-			0)	
+			0)
 				sleep 3 && clear
 				echo -e "The user $userName was created successfully!\n"
 				;;
 			*)
-				sleep 3 && clear 
+				sleep 3 && clear
 				echo -e "An error occured. The command was unable to finish\n"
 				;;
 		esac
@@ -50,7 +51,7 @@ while [ true ]; do
 	elif [ $userIn == D ] || [ $userIn == d ]; then
 		echo -en "\nEnter the username of the user you wish to change primary groups for: "; read userName
 		echo -n "Enter the name of the group you'd like to have as your primary group: "; read primGroup
-		sudo usermod -g $primGroup $userName	
+		sudo usermod -g $primGroup $userName
 		case $? in
 			0)
 				sleep 3 && clear
@@ -68,7 +69,7 @@ while [ true ]; do
 		case $? in
 			0)
 				sleep 3 && clear
-				echo -e "Default shell for $userName is now set to $shell\n" 
+				echo -e "Default shell for $userName is now set to $shell\n"
 				;;
 			*)
 				sleep 3 && clear
@@ -76,7 +77,7 @@ while [ true ]; do
 			esac
 	elif [ $userIn == F ] || [ $userIn == f ]; then
 		echo -en "\nEnter user whos expiration date you wish to edit: "; read userName
-		echo -n "Enter the expiry date youd like to use (YYYY-MM-DD): "; read expDate 
+		echo -n "Enter the expiry date youd like to use (YYYY-MM-DD): "; read expDate
 		sudo usermod -e $expDate $userName
 		case $? in
 			0)
@@ -88,9 +89,9 @@ while [ true ]; do
 				echo -e "An error occured. The command was unable to finish\n"
 		esac
 	elif [ $userIn == Q ] || [ $userIn == q ]; then
-		exit	
+		exit
 	else
-	      	sleep 3 && clear	
+	      	sleep 3 && clear
 		echo -e "Sorry, but that was not a valid input\n"
 	fi
 done
